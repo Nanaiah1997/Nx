@@ -1,0 +1,81 @@
+{
+  "name": "leaps",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/leaps/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/leaps",
+        "index": "apps/leaps/src/index.html",
+        "baseHref": "/",
+        "main": "apps/leaps/src/main.tsx",
+        "polyfills": "apps/leaps/src/polyfills.ts",
+        "tsConfig": "apps/leaps/tsconfig.app.json",
+        "assets": ["apps/leaps/src/favicon.ico", "apps/leaps/src/assets"],
+        "styles": ["apps/leaps/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "@nrwl/react/plugins/webpack"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/leaps/src/environments/environment.ts",
+              "with": "apps/leaps/src/environments/environment.prod.ts"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/webpack:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "leaps:build",
+        "hmr": true
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "leaps:build:development"
+        },
+        "production": {
+          "buildTarget": "leaps:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/leaps/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/leaps"],
+      "options": {
+        "jestConfig": "apps/leaps/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

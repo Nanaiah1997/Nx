@@ -1,0 +1,99 @@
+{
+  "name": "mfe-auth",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "apps/mfe/auth/src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/webpack:webpack",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "compiler": "babel",
+        "outputPath": "dist/apps/mfe/auth",
+        "index": "apps/mfe/auth/src/index.html",
+        "baseHref": "/",
+        "main": "apps/mfe/auth/src/main.ts",
+        "polyfills": "apps/mfe/auth/src/polyfills.js",
+        "tsConfig": "apps/mfe/auth/tsconfig.app.json",
+        "assets": ["apps/mfe/auth/src/favicon.ico", "apps/mfe/auth/src/assets"],
+        "styles": ["apps/mfe/auth/src/styles.scss"],
+        "scripts": [],
+        "webpackConfig": "apps/mfe/auth/webpack.config.js"
+      },
+      "configurations": {
+        "development": {
+          "extractLicenses": false,
+          "optimization": false,
+          "sourceMap": true,
+          "vendorChunk": true
+        },
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "apps/mfe/auth/src/environments/environment.js",
+              "with": "apps/mfe/auth/src/environments/environment.prod.js"
+            }
+          ],
+          "optimization": true,
+          "outputHashing": "all",
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true,
+          "vendorChunk": false,
+          "webpackConfig": "apps/mfe/auth/webpack.config.prod.js"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nrwl/react:module-federation-dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "mfe-auth:build",
+        "hmr": true,
+        "port": 4201
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "mfe-auth:build:development"
+        },
+        "production": {
+          "buildTarget": "mfe-auth:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/mfe/auth/**/*.{ts,tsx,js,jsx}"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/mfe/auth"],
+      "options": {
+        "jestConfig": "apps/mfe/auth/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "serve-static": {
+      "executor": "@nrwl/web:file-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "mfe-auth:build",
+        "port": 4201
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "mfe-auth:build:development"
+        },
+        "production": {
+          "buildTarget": "mfe-auth:build:production"
+        }
+      }
+    }
+  },
+  "tags": []
+}

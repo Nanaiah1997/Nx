@@ -1,0 +1,34 @@
+{
+  "name": "redux-auth-demo-slice",
+  "$schema": "../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/redux/auth/demo-slice/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nrwl/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/redux/auth/demo-slice",
+        "main": "libs/redux/auth/demo-slice/src/index.js",
+        "tsConfig": "libs/redux/auth/demo-slice/tsconfig.lib.json",
+        "assets": ["libs/redux/auth/demo-slice/*.md"]
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/redux/auth/demo-slice/**/*.js"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/redux/auth/demo-slice"],
+      "options": {
+        "jestConfig": "libs/redux/auth/demo-slice/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

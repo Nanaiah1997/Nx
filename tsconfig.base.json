@@ -14,7 +14,18 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@workspace/button": ["libs/button/src/index.js"],
+      "@workspace/button-comp": ["libs/button-comp/src/index.js"],
+      "@workspace/component": ["libs/component/src/index.js"],
+      "@workspace/component/table": ["libs/component/table/src/index.ts"],
+      "@workspace/components": ["libs/components/src/index.js"],
+      "@workspace/redux/auth/demo-slice": [
+        "libs/redux/auth/demo-slice/src/index.js"
+      ],
+      "@workspace/store/auth": ["libs/store/auth/src/index.js"],
+      "@workspace/theme/theme": ["libs/theme/theme/src/index.js"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
